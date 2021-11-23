@@ -1,0 +1,9 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~ CDP/LLDP NEIGHBORS ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% for interface,neighbors in ansible_facts.net_neighbors.items() %}
+Interface: {{interface}}
+{% for neighbor in neighbors %}
+Host: {{neighbor.host}}, Platform: {{neighbor.platform}}, Remote Interface: {{neighbor.port}}
+{% endfor %}
+---------------------------------------------------------------------------------------------
+{% endfor %}
+

@@ -1,0 +1,303 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~ LAYER 2 INTERFACES IN UP STATE ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Interface: GigabitEthernet1/0/2
+ - STATE: up
+ - Mode: access
+ - Access VLAN: 4
+ - MAC Address: a4b4.395e.df82
+ - Description: UCS_CIMC
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/3
+ - STATE: up
+ - Mode: trunk
+ - Trunk Allowed VLANs:
+   - 2
+   - 4
+   - 5
+   - 7
+ - MAC Address: a4b4.395e.df83
+ - Description: UCS_VMnic0
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/4
+ - STATE: up
+ - Mode: trunk
+ - Trunk Allowed VLANs:
+   - 2
+   - 4
+   - 5
+   - 7
+ - MAC Address: a4b4.395e.df84
+ - Description: UCS_VMnic1
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/5
+ - STATE: down
+ - Mode: trunk
+ - Trunk Allowed VLANs:
+   - 2
+   - 4
+   - 5
+   - 7
+ - MAC Address: a4b4.395e.df85
+ - Description: UCS_VMnic2
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/6
+ - STATE: down
+ - Mode: trunk
+ - Trunk Allowed VLANs:
+   - 2
+   - 4
+   - 5
+   - 7
+ - MAC Address: a4b4.395e.df86
+ - Description: UCS_VMnic3
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/7
+ - STATE: up
+ - Mode: access
+ - Access VLAN: 103
+ - MAC Address: a4b4.395e.df87
+ - Description: UCS_VMnic4_AUTH_Testing
+ - MTU: 1500
+ - Bandwidth: 100000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/8
+ - STATE: down
+ - Mode: trunk
+ - Trunk Allowed VLANs:
+   - 2
+   - 4
+   - 5
+   - 7
+ - MAC Address: a4b4.395e.df88
+ - Description: UCS_VMnic5
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/9
+ - STATE: up
+ - Mode: access
+ - Access VLAN: 4
+ - MAC Address: a4b4.395e.df89
+ - Description: iDrac
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/10
+ - STATE: up
+ - Mode: trunk
+ - Trunk Allowed VLANs:
+   - 2
+   - 4
+   - 5
+   - 7
+ - MAC Address: a4b4.395e.df8a
+ - Description: r620_nic1
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/11
+ - STATE: up
+ - Mode: trunk
+ - Trunk Allowed VLANs:
+   - 2
+   - 4
+   - 5
+   - 7
+ - MAC Address: a4b4.395e.df8b
+ - Description: r620_nic2
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/14
+ - STATE: up
+ - Mode: trunk
+ - Trunk Allowed VLANs:
+   - 4
+   - 7
+   - 30
+   - 50
+ - MAC Address: a4b4.395e.df8e
+ - Description: 3702i_FLEX_TRUNK
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/15
+ - STATE: down
+ - Mode: trunk
+ - Trunk Allowed VLANs:
+   - 4
+   - 7
+   - 30
+   - 50
+ - MAC Address: a4b4.395e.df8f
+ - Description: 3702E_FLEX_TRUNK
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/16
+ - STATE: up
+ - Mode: access
+ - Access VLAN: 2
+ - MAC Address: a4b4.395e.df90
+ - Description: TO_OFFICE_L2_SWITCH
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/17
+ - STATE: down
+ - Mode: access
+ - Access VLAN: 2
+ - MAC Address: a4b4.395e.df91
+ - Description: GAMING_PC
+ - MTU: 1500
+ - Bandwidth: 10000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/18
+ - STATE: up
+ - Mode: access
+ - Access VLAN: 7
+ - MAC Address: a4b4.395e.df92
+ - Description: PHILLIPS_HUE_ON_WIRELESS_VLAN
+ - MTU: 1500
+ - Bandwidth: 100000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/19
+ - STATE: up
+ - Mode: access
+ - Access VLAN: 7
+ - MAC Address: a4b4.395e.df93
+ - Description: MERAKI_ACCESS_POINT
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/20
+ - STATE: up
+ - Mode: access
+ - Access VLAN: 2
+ - MAC Address: a4b4.395e.df94
+ - Description: R620_Authc_Testing_eth4_vmnic3
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/21
+ - STATE: up
+ - Mode: trunk
+ - Trunk Allowed VLANs:
+   - 110
+   - 111
+ - MAC Address: a4b4.395e.df95
+ - Description: L2_FIREWALL_SUBINTERFACES
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/22
+ - STATE: up
+ - Mode: access
+ - Access VLAN: 348
+ - MAC Address: a4b4.395e.df96
+ - Description: C1_C2_SHARED_INT_GI0/2
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/23
+ - STATE: up
+ - Mode: access
+ - Access VLAN: 103
+ - MAC Address: a4b4.395e.df97
+ - Description: C1_INSIDE_GI0/3
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/24
+ - STATE: up
+ - Mode: access
+ - Access VLAN: 102
+ - MAC Address: a4b4.395e.df98
+ - Description: C2_INSIDE_GI0/4
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/25
+ - STATE: up
+ - Mode: trunk
+ - Trunk Allowed VLANs:
+   - 4
+   - 7
+   - 30
+   - 50
+ - MAC Address: a4b4.395e.df99
+ - Description: C3850-24P-POE
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/26
+ - STATE: up
+ - Mode: trunk
+ - Trunk Allowed VLANs:
+   - 4
+   - 7
+   - 30
+   - 50
+ - MAC Address: a4b4.395e.df9a
+ - Description: AP4800-1
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/27
+ - STATE: down
+ - Mode: trunk
+ - Trunk Allowed VLANs:
+   - 4
+   - 7
+   - 30
+   - 50
+ - MAC Address: a4b4.395e.df9b
+ - Description: AP4800-2
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
+Interface: GigabitEthernet1/0/48
+ - STATE: up
+ - Mode: access
+ - Access VLAN: 301
+ - MAC Address: a4b4.395e.dfb0
+ - Description: 
+ - MTU: 1500
+ - Bandwidth: 1000000
+ - Duplex: 
+!
