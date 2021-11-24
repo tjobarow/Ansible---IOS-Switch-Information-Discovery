@@ -1,6 +1,6 @@
 ---
   - name: Gather facts on IOS switches listed within the inventory file.
-    hosts: testing
+    hosts: all
     gather_facts: no
 
     ##############################################################
@@ -116,13 +116,13 @@
 
     - name: Save show version output to {{inventory_hostname}}_version_.txt file
       copy:
-        content: "{{version_info_full.stdout }}"
+        content: "{{ version_info_full.stdout | replace('\\n','\n') }}"
         dest: /home/tobarows/switch_fact_discovery/switch_info/{{customer_name}}/{{inventory_hostname}}/{{inventory_hostname}}_version_information.txt
         force: yes
 
-    ##############################################################
-    # TASKS REQUIRED TO GATHER GENERAL INTERFACE INFO #
-    ##############################################################
+    ###############################################################
+    # TASKS REQUIRED ZIP INFORMATION GATHERED THROUGHOUT PLAYBOOK #
+    ###############################################################
     - name: Zip host folder for easy transfer
       archive:
         path:

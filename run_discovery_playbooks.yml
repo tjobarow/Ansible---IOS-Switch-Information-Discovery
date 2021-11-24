@@ -1,12 +1,29 @@
 ---
-hosts: localhost
-tasks:
+- name: Run discovery play books...
+  hosts: localhost
+  tasks:
   - name: Run playbook to generate inventory file from customer provided CSV
     shell: "ansible-playbook -i ./inventories/servers parse_csv_to_inventory.yml --extra-vars customer_name={{customer_name}}"
     register: playbook_output
-    debug: var=playbook_output.stdout_lines
+  
+  - name: Print the playbook output for generating inventory file...  
+    debug: 
+      var: playbook_output.stdout_lines
   
   - name: Run playbook to gather IOS facts
-    shell: "ansible-playbook -i ./inventories/customer_inventories/{{customer_name}}_inventory.yml switch_fact_discovery --extra-vars customer_name={{customer_name}}"
+    shell: "ansible-playbook -i ./inventories/customer_inventories/{{customer_name}}_inventory.yml ios_fact_discovery.yml --extra-vars customer_name={{customer_name}}"
     register: playbook_output
-    debug: var=playbook_output.stdout_lines
+  
+  - name: Print the playbook out for gathering IOS facts...  
+    debug:
+      var: playbook_output.stdout_lines
+
+  ###################################################################################################################
+  # This section will perform file cleanup, and remove unwanted inventory and text files after playbook execution   #
+  ###################################################################################################################
+
+  - name: Remove customer inventory YAMLs
+    shell: "rm -r /home/tobarows/switch_fact_discovery/inventories/customer_inventories/*"
+
+    #  - name: Remove text files
+    #    shell: "rm -r /home/tobarows/switch_fact_discovery/switch_info/*"
