@@ -34,9 +34,7 @@ description:
 
 options:
     name:
-        description:
-          - Create dictionary object from CSV file with ordered headers:
-          - host/fqdn,ansible_user,ansible_password,ansible_become_password,group
+        description: Create dictionary object from CSV file with ordered headers
         required: true
         type: str
 
