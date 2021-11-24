@@ -1,0 +1,12 @@
+---
+hosts: localhost
+tasks:
+  - name: Run playbook to generate inventory file from customer provided CSV
+    shell: "ansible-playbook -i ./inventories/servers parse_csv_to_inventory.yml --extra-vars customer_name={{customer_name}}"
+    register: playbook_output
+    debug: var=playbook_output.stdout_lines
+  
+  - name: Run playbook to gather IOS facts
+    shell: "ansible-playbook -i ./inventories/customer_inventories/{{customer_name}}_inventory.yml switch_fact_discovery --extra-vars customer_name={{customer_name}}"
+    register: playbook_output
+    debug: var=playbook_output.stdout_lines

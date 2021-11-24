@@ -1,4 +1,3 @@
 ﻿ip/fqdn,ansible_user,ansible_pass,ansible_become_pass,group
 10.0.4.1,tobarows,cisco123,cisco123,production
 10.0.4.251,tobarows,cisco123,cisco123,testing
-10.0.4.90,tobarows,cisco123,cisco123,testing
