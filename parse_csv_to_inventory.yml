@@ -1,11 +1,39 @@
 ---
 - name: Parse inventory CSV to YML inventory file.
   hosts: localhost
-  tasks: 
+  tasks:
+
+  #####################################################################
+  # TASKS BELOW CALL THE CUSTOMER PYTHON CSV PARSER MODULE AND RETURN #
+  # A DICTIONARY OF GROUPS AND HOSTS                                  #
+  #####################################################################
+
+  # Call the parse_csv_to_inv_dict_info module that takes a path as input
+  # and returns dict obj of groups and hosts
   - name: Call parse module to parse CSV
     parse_csv_to_inv_dict_info:
-      path: "/home/tobarows/switch_fact_discovery/modules/inventory.csv"
-    register: output    
+      path: "/home/tobarows/switch_fact_discovery/csv_files/inventory.csv"
+    register: inventory_object
+
+  # Print the returned dict to debug (stdout)
   - name: Debug variable
     debug:
       msg: "{{output}}"
+
+  #################################################################
+  # TASKS BELOW RENDER INVENTORY DATA FROM CSV INTO INVENTORY YML #
+  #################################################################
+
+  # Create inventory YML file that we will render the inventory to
+  - name: Creating YML file to render inventory to..
+    file:
+      path: /home/tobarows/switch_fact_discovery/inventories/customer_inventories/{{customer_name}}_inventory.yml
+      state: touch
+      force: yes
+
+  # Render the inventory file that is based off of hosts provided in the inventory.csv file
+  - name: Rendering inventory file based on customer inventory data...
+    template:
+      src: /home/tobarows/switch_fact_discovery/templates/inventory_template.j2
+      dest: /home/tobarows/switch_fact_discovery/inventories/customer_inventories/{{customer_name}}_inventory.yml
+      lstrip_blocks: yes
