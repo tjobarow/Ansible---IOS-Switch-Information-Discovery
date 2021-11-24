@@ -80,6 +80,15 @@ def run_module():
         path=dict(type='str', required=True),
     )
 
+    # the AnsibleModule object will be our abstraction working with Ansible
+    # this includes instantiation, a couple of common attr would be the
+    # args/params passed to the execution, as well as if the module
+    # supports check mode
+    module = AnsibleModule(
+        argument_spec=module_args,
+        supports_check_mode=True
+    )
+
     # seed the result dict in the object
     # we primarily care about changed and state
     # changed is if this module effectively modified the target
@@ -90,15 +99,6 @@ def run_module():
         path=module.params['path'],
         message='Parsed the CSV to inventory dictionary object.',
         inventory_dict_info={},
-    )
-
-    # the AnsibleModule object will be our abstraction working with Ansible
-    # this includes instantiation, a couple of common attr would be the
-    # args/params passed to the execution, as well as if the module
-    # supports check mode
-    module = AnsibleModule(
-        argument_spec=module_args,
-        supports_check_mode=True
     )
 
     # if the user is working with this module in only check mode we do not
