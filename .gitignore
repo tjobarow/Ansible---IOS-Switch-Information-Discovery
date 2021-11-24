@@ -1,6 +1,6 @@
+!/switch_info/.HOLDER
+!/inventories/customer_inventories/.HOLDER
+/inventories/customer_inventories/*
+/switch_info/*
 *.zip
 *.txt
-inventories/customer_inventories/*
-/zip_files/*.zip
-!/switch_info/.HOLDER
-switch_info/*
