@@ -18,7 +18,7 @@
   # Print the returned dict to debug (stdout)
   - name: Debug variable
     debug:
-      msg: "{{output}}"
+      msg: "{{inventory_object}}"
 
   #################################################################
   # TASKS BELOW RENDER INVENTORY DATA FROM CSV INTO INVENTORY YML #
