@@ -1,6 +1,6 @@
 ---
   - name: Gather facts on IOS switches listed within the inventory file.
-    hosts: production
+    hosts: all
     gather_facts: no
 
     ##############################################################
@@ -26,7 +26,7 @@
     # name of the folder is based on the hostname within the inventory file.
     - name: Create overarching folder that will hold host folders
       file:
-        path: /home/tobarows/switch_fact_discovery/switch_info/{{inventory_hostname}}
+        path: /home/tobarows/switch_fact_discovery/switch_info/{{customer_name}}/{{inventory_hostname}}
         state: directory
         force: no
 
@@ -34,14 +34,14 @@
     - name: Copy ansible_facts into file
       copy:
         content: "{{ ansible_facts | to_nice_json }}"
-        dest: /home/tobarows/switch_fact_discovery/switch_info/{{inventory_hostname}}/{{inventory_hostname}}_ansible_facts.txt
+        dest: /home/tobarows/switch_fact_discovery/switch_info/{{customer_name}}/{{inventory_hostname}}/{{inventory_hostname}}_ansible_facts.txt
         force: yes
 
     # Create a file that will house the running-config from the switch. Save running config into fule
     - name: Create file for configuration backup and save running config to it
       copy:
         content: "{{ ansible_facts.net_config }}"
-        dest: /home/tobarows/switch_fact_discovery/switch_info/{{inventory_hostname}}/{{inventory_hostname}}_config.txt
+        dest: /home/tobarows/switch_fact_discovery/switch_info/{{customer_name}}/{{inventory_hostname}}/{{inventory_hostname}}_config.txt
         force: yes
 
     ##############################################################
@@ -51,7 +51,7 @@
     # Create file that will render j2 template in next step. Will contain LLDP/CDP neighbor detail
     - name: Create CDP/LLDP Neighbors File
       file:
-        path: /home/tobarows/switch_fact_discovery/switch_info/{{inventory_hostname}}/{{inventory_hostname}}_neighbors.txt
+        path: /home/tobarows/switch_fact_discovery/switch_info/{{customer_name}}/{{inventory_hostname}}/{{inventory_hostname}}_neighbors.txt
         state: touch
         force: yes
 
@@ -59,7 +59,7 @@
     - name: Save CDP/LLDP neighbors
       template:
         src: /home/tobarows/switch_fact_discovery/templates/neighbors_template.j2
-        dest: /home/tobarows/switch_fact_discovery/switch_info/{{inventory_hostname}}/{{inventory_hostname}}_neighbors.txt
+        dest: /home/tobarows/switch_fact_discovery/switch_info/{{customer_name}}/{{inventory_hostname}}/{{inventory_hostname}}_neighbors.txt
         lstrip_blocks: yes
 
     ##############################################################
@@ -69,7 +69,7 @@
     # Create file that will render j2 template in next step. Will contain interface information
     - name: Create text file that general interface info template will render to.
       file:
-        path: /home/tobarows/switch_fact_discovery/switch_info/{{inventory_hostname}}/{{inventory_hostname}}_interface_general_info.txt
+        path: /home/tobarows/switch_fact_discovery/switch_info/{{customer_name}}/{{inventory_hostname}}/{{inventory_hostname}}_interface_general_info.txt
         state: touch
         force: yes
 
@@ -77,7 +77,7 @@
     - name: Render interfaces_template.j2 into text file. This will render general interface information to this text file.
       template:
         src: /home/tobarows/switch_fact_discovery/templates/interfaces_all_template.j2
-        dest: /home/tobarows/switch_fact_discovery/switch_info/{{inventory_hostname}}/{{inventory_hostname}}_interface_general_info.txt
+        dest: /home/tobarows/switch_fact_discovery/switch_info/{{customer_name}}/{{inventory_hostname}}/{{inventory_hostname}}_interface_general_info.txt
         lstrip_blocks: yes
 
     ##############################################################
@@ -87,7 +87,7 @@
     # Create file that will render j2 template in next step. Will contain L2 interface information
     - name: Create text file that layer 2 interface info template will render to.
       file:
-        path: /home/tobarows/switch_fact_discovery/switch_info/{{inventory_hostname}}/{{inventory_hostname}}_interface_layer_2_info.txt
+        path: /home/tobarows/switch_fact_discovery/switch_info/{{customer_name}}/{{inventory_hostname}}/{{inventory_hostname}}_interface_layer_2_info.txt
         state: touch
         force: yes
 
@@ -95,21 +95,21 @@
     - name: Render interfaces_template.j2 into text file. This will render general interface information to this text file.
       template:
         src: /home/tobarows/switch_fact_discovery/templates/interfaces_layer_2_template.j2
-        dest: /home/tobarows/switch_fact_discovery/switch_info/{{inventory_hostname}}/{{inventory_hostname}}_interface_layer_2_info.txt
+        dest: /home/tobarows/switch_fact_discovery/switch_info/{{customer_name}}/{{inventory_hostname}}/{{inventory_hostname}}_interface_layer_2_info.txt
         lstrip_blocks: yes
 
     ############################################################################
     # TASKS REQUIRED TO GATHER A SHOW VERSION COMMAND OUT, AND SAVE TO FILE    #
     ############################################################################
-    # Create the file that will store the output of show version. Use the file module with state touch to create the command. 
-    - name: Create show version text file, to save version information to. 
+    # Create the file that will store the output of show version. Use the file module with state touch to create the command.
+    - name: Create show version text file, to save version information to.
       file:
-        path: /home/tobarows/switch_fact_discovery/switch_info/{{inventory_hostname}}/{{inventory_hostname}}_version_information.txt 
+        path: /home/tobarows/switch_fact_discovery/switch_info/{{customer_name}}/{{inventory_hostname}}/{{inventory_hostname}}_version_information.txt
         state: touch
         force: yes
-   
-    # This task will actually execute the command on the switch. We then register to output of show version to a variable. 
-    - name: Issue full show version command, and record output to variable version_info_full 
+
+    # This task will actually execute the command on the switch. We then register to output of show version to a variable.
+    - name: Issue full show version command, and record output to variable version_info_full
       ios_command:
         commands: show version
       register: version_info_full
@@ -117,7 +117,7 @@
     - name: Save show version output to {{inventory_hostname}}_version_.txt file
       copy:
         content: "{{version_info_full.stdout }}"
-        dest: /home/tobarows/switch_fact_discovery/switch_info/{{inventory_hostname}}/{{inventory_hostname}}_version_information.txt
+        dest: /home/tobarows/switch_fact_discovery/switch_info/{{customer_name}}/{{inventory_hostname}}/{{inventory_hostname}}_version_information.txt
         force: yes
 
     ##############################################################
@@ -126,7 +126,6 @@
     - name: Zip host folder for easy transfer
       archive:
         path:
-          - /home/tobarows/switch_fact_discovery/switch_info/{{ inventory_hostname }}
-        dest: /home/tobarows/switch_fact_discovery/zip_files/{{inventory_hostname}}.zip
+          - /home/tobarows/switch_fact_discovery/switch_info/{{customer_name}}
+        dest: /home/tobarows/switch_fact_discovery/zip_files/{{customer_name}}.zip
         format: zip
-
