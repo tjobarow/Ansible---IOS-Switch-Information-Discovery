@@ -2,3 +2,4 @@
 *.txt
 inventories/customer_inventories/*
 /zip_files/*.zip
+switch_info/*
