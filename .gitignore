@@ -1,3 +1,4 @@
 *.zip
 *.txt
 inventories/customer_inventories/*
+/zip_files/*.zip
