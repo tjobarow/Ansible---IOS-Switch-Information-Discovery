@@ -10,56 +10,56 @@ DOCUMENTATION = r'''
 ---
 module: parse_csv_to_inv_dict_info
 
-short_description: This module parses a CSV file with headers in order of:
-host/fqdn,ansible_user,ansible_password,ansible_become_password,group
-and then creates a dict obj where the primary key is the group for which
-the host resides. Each group (key) value is a list of host entries
-
+short_description:
+  - This module parses a CSV file with headers in order of:
+  - host/fqdn,ansible_user,ansible_password,ansible_become_password,group
+  - and then creates a dict obj where the primary key is the group for which
+  - the host resides. Each group (key) value is a list of host entries
 
 version_added: "1.0.0"
 
-description: This module takes a path as an arguement, and then opens the CSV
-file and uses CSV_reader to parse through each row of the CSV. The first row
-(headers) are ignored. A dictionary object is created for each host entry:
-host_entry = {
-    'host_ip':row[0],
-    'ansible_user':row[1],
-    'ansible_password':row[2],
-    'ansible_become_password':row[3]
-}
-We take the host group (row[4]) and check if it exists as a key in the return dictionary.
-If it does not, we create a key/value pair for this group. The key is the group name, the value
-is an empty list that will be used to place host entry dict objects into.
-If the key exists (or it was just made), we place a copy of the host_entry dict
-into the list corresponding to the group.
-
-Essentially, we have a return dictionary obj that will appear in a format like below.
-This can then be used to render a jinja2 template in another task.
-{
-    "production": [
-        {
-            "host_ip": "10.0.4.1",
-            "ansible_user": "tobarows",
-            "ansible_password": "*******",
-            "ansible_become_password": "*******"
-        }
-    ],
-    "testing": [
-        {
-            "host_ip": "10.0.4.251",
-            "ansible_user": "tobarows",
-            "ansible_password": "*******",
-            "ansible_become_password": "*******"
-        },
-        {
-            "host_ip": "10.0.4.90",
-            "ansible_user": "tobarows",
-            "ansible_password": "*******",
-            "ansible_become_password": "*******"
-        }
-    ]
-}
-
+description:
+  - This module takes a path as an arguement, and then opens the CSV
+  - file and uses CSV_reader to parse through each row of the CSV. The first row
+  - (headers) are ignored. A dictionary object is created for each host entry:
+  - host_entry = {
+  -     'host_ip':row[0],
+  -     'ansible_user':row[1],
+  -     'ansible_password':row[2],
+  -     'ansible_become_password':row[3]
+  - }
+  - We take the host group (row[4]) and check if it exists as a key in the return dictionary.
+  - If it does not, we create a key/value pair for this group. The key is the group name, the value
+  - is an empty list that will be used to place host entry dict objects into.
+  - If the key exists (or it was just made), we place a copy of the host_entry dict
+  - into the list corresponding to the group.
+  -
+  - Essentially, we have a return dictionary obj that will appear in a format like below.
+  - This can then be used to render a jinja2 template in another task.
+  - {
+  -     "production": [
+  -         {
+  -             "host_ip": "10.0.4.1",
+  -             "ansible_user": "tobarows",
+  -             "ansible_password": "*******",
+  -             "ansible_become_password": "*******"
+  -         }
+  -     ],
+  -     "testing": [
+  -         {
+  -             "host_ip": "10.0.4.251",
+  -             "ansible_user": "tobarows",
+  -             "ansible_password": "*******",
+  -             "ansible_become_password": "*******"
+  -         },
+  -         {
+  -             "host_ip": "10.0.4.90",
+  -             "ansible_user": "tobarows",
+  -             "ansible_password": "*******",
+  -             "ansible_become_password": "*******"
+  -         }
+  -     ]
+  - }
 options:
     name:
         description: Create dictionary object from CSV file with ordered headers: host/fqdn,ansible_user,ansible_password,ansible_become_password,group
