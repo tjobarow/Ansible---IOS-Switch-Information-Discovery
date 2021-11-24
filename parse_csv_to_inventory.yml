@@ -1,0 +1,2 @@
+---
+- name: Parse inventory CSV to YML inventory file.

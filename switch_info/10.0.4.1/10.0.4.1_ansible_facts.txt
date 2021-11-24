@@ -23,15 +23,15 @@
         }
     },
     "net_gather_network_resources": [
-        "l3_interfaces",
+        "l2_interfaces",
         "interfaces",
-        "l2_interfaces"
+        "l3_interfaces"
     ],
     "net_gather_subset": [
         "config",
+        "hardware",
         "interfaces",
-        "default",
-        "hardware"
+        "default"
     ],
     "net_hostname": "9300_Core",
     "net_image": "flash:packages.conf",
@@ -1007,7 +1007,7 @@
         }
     },
     "net_iostype": "IOS-XE",
-    "net_memfree_mb": 1021943.51953125,
+    "net_memfree_mb": 1021943.23046875,
     "net_memtotal_mb": 1331385.33984375,
     "net_model": "C9300-48P",
     "net_neighbors": {

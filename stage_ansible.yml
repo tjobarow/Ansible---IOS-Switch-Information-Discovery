@@ -1,0 +1,34 @@
+---
+  - name: Stage ansible control node to reach out to hosts
+    hosts: localhost
+    vars:
+      host_list: "{{ lookup('file', 'hostlist.json') | from_json }}"
+    tasks:
+     
+      - name: Create directory to save the unique key passed to ansible into file. Used to track requests for auto-discovery
+        file:
+          path: /home/ansible/stage_control_node/requests/{{request_key}}
+          state: directory
+      
+      - name: Save key into file in directory
+        copy:
+          content: "{{request_key}}"
+          dest: "/home/ansible/stage_control_node/requests/{{request_key}}/key"
+
+      - name: Display JSON variable
+        debug:
+          msg: 
+          - "{{host_list}}"
+
+      - name: Create .yml inventory file to be used for fact gathering playbook
+        file:
+          path: /home/ansible/requests/{{request_key}}/{{request_key}}_inv.yml
+          state: touch 
+      
+      - name: Render inventory file
+        template:
+          src: /home/ansible/stage_control_node/templates/inventory_template.j2
+          dest: /home/ansible/stage_control_node/requests/{{request_key}}/{{request_key}}_inv.yml
+          owner: root
+          group: root
+          lstrip_blocks: yes      
