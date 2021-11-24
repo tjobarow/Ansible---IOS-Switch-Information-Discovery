@@ -1,0 +1,6 @@
+sh int status of ints in up state
+sh cdp ne
+sh lldp n
+l2 interfaces - access vs trunks
+sh run
+sh ver

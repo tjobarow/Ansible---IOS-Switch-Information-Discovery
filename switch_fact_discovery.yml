@@ -98,6 +98,28 @@
         dest: /home/tobarows/switch_fact_discovery/switch_info/{{inventory_hostname}}/{{inventory_hostname}}_interface_layer_2_info.txt
         lstrip_blocks: yes
 
+    ############################################################################
+    # TASKS REQUIRED TO GATHER A SHOW VERSION COMMAND OUT, AND SAVE TO FILE    #
+    ############################################################################
+    # Create the file that will store the output of show version. Use the file module with state touch to create the command. 
+    - name: Create show version text file, to save version information to. 
+      file:
+        path: /home/tobarows/switch_fact_discovery/switch_info/{{inventory_hostname}}/{{inventory_hostname}}_version_information.txt 
+        state: touch
+        force: yes
+   
+    # This task will actually execute the command on the switch. We then register to output of show version to a variable. 
+    - name: Issue full show version command, and record output to variable version_info_full 
+      ios_command:
+        commands: show version
+      register: version_info_full
+
+    - name: Save show version output to {{inventory_hostname}}_version_.txt file
+      copy:
+        content: "{{version_info_full.stdout }}"
+        dest: /home/tobarows/switch_fact_discovery/switch_info/{{inventory_hostname}}/{{inventory_hostname}}_version_information.txt
+        force: yes
+
     ##############################################################
     # TASKS REQUIRED TO GATHER GENERAL INTERFACE INFO #
     ##############################################################

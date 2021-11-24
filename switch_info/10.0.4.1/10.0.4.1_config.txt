@@ -1,6 +1,5 @@
 !
-! Last configuration change at 18:55:54 UTC Fri Nov 19 2021 by tobarows
-! NVRAM config last updated at 21:39:57 UTC Thu Nov 4 2021 by tobarows
+! Last configuration change at 08:02:29 UTC Wed Nov 24 2021
 !
 version 17.3
 service timestamps debug datetime msec
@@ -19,7 +18,6 @@ vrf definition Mgmt-vrf
  address-family ipv6
  exit-address-family
 !
-logging buffered informational
 logging console alerts
 enable password cisco123
 !
@@ -77,13 +75,25 @@ ip domain name obarowski.lab
 !
 !
 ip dhcp snooping glean
-ip dhcp snooping vlan 2-7
+ip dhcp snooping vlan 2,4-5,7
 login on-success log
 !
 !
 !
 !
 !
+!
+device-sensor filter-list cdp list CDP
+ tlv name device-name
+ tlv name address-type
+ tlv name capabilities-type
+ tlv name platform-type
+!
+device-sensor filter-list lldp list LLDP
+ tlv name port-id
+ tlv name port-description
+ tlv name system-name
+ tlv name system-description
 !
 device-sensor filter-list dhcp list DHCP
  option name routers
@@ -94,18 +104,6 @@ device-sensor filter-list dhcp list DHCP
  option name class-identifier
  option name client-identifier
  option name client-fqdn
-!
-device-sensor filter-list lldp list LLDP
- tlv name port-id
- tlv name port-description
- tlv name system-name
- tlv name system-description
-!
-device-sensor filter-list cdp list CDP
- tlv name device-name
- tlv name address-type
- tlv name capabilities-type
- tlv name platform-type
 device-sensor filter-spec dhcp include list DHCP
 device-sensor filter-spec lldp include list LLDP
 device-sensor filter-spec cdp include list CDP
@@ -577,22 +575,10 @@ interface GigabitEthernet1/0/24
  switchport mode access
 !
 interface GigabitEthernet1/0/25
- description C3850-24P-POE
- switchport trunk allowed vlan 4,7,30,50
- switchport mode trunk
- ip dhcp snooping trust
 !
 interface GigabitEthernet1/0/26
- description AP4800-1
- switchport trunk allowed vlan 4,7,30,50
- switchport mode trunk
- ip dhcp snooping trust
 !
 interface GigabitEthernet1/0/27
- description AP4800-2
- switchport trunk allowed vlan 4,7,30,50
- switchport mode trunk
- ip dhcp snooping trust
 !
 interface GigabitEthernet1/0/28
 !
@@ -748,12 +734,6 @@ ip access-list extended ACL_GUEST_REDIRECT
  10 permit tcp any any eq 443 log
  20 permit tcp any any eq www log
  30 deny   ip any any log
-ip access-list extended HULU_CAP
- 10 permit ip any host 10.0.7.38
- 20 permit ip host 10.0.7.38 any
- 30 permit ip any host 10.0.7.23
- 40 permit ip host 10.0.7.23 any
- 50 deny   ip any any
 ip access-list extended PREAUTH_ACL
  10 permit udp any eq bootpc any eq bootps
  20 permit udp any eq bootps any eq bootpc

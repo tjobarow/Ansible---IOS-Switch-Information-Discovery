@@ -16,6 +16,9 @@ Host: ise30, Platform: ISE-VM-K9, Remote Interface: eth0
 Interface: GigabitEthernet1/0/4
 Host: esxi, Platform: VMware ESX, Remote Interface: vmnic1
 ---------------------------------------------------------------------------------------------
+Interface: GigabitEthernet1/0/7
+Host: esxi, Platform: VMware ESX, Remote Interface: vmnic4
+---------------------------------------------------------------------------------------------
 Interface: GigabitEthernet1/0/3
 Host: esxi, Platform: VMware ESX, Remote Interface: vmnic0
 ---------------------------------------------------------------------------------------------
