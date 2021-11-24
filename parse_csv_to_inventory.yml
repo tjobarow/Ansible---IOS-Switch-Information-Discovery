@@ -1,2 +1,11 @@
 ---
 - name: Parse inventory CSV to YML inventory file.
+  hosts: localhost
+  tasks: 
+  - name: Call parse module to parse CSV
+    parse_csv_to_inv_dict_info:
+      path: "/home/tobarows/switch_fact_discovery/modules/inventory.csv"
+    register: output    
+  - name: Debug variable
+    debug:
+      msg: "{{output}}"
