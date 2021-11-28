@@ -1,0 +1,16 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~ ALL SWITCH INTERFACES ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% for interface,attribute in ansible_facts.net_interfaces.items() %}
+Interface: {{interface}}
+- MAC Address: {{attribute.macaddress}}
+- STATE: {{attribute.operstatus}}
+- Description: {{attribute.description}}
+- MTU: {{attribute.mtu}}
+- Bandwidth: {{attribute.bandwidth}}
+- Duplex: {{attribute.duplex}}
+{% if attribute.ipv4|length > 0 %}
+{% for ip in attribute.ipv4 %}
+- IP Address: {{ip.address}}/{{ip.subnet}}
+{% endfor %}
+{% endif %}
+!
+{% endfor %}

@@ -1,0 +1,18 @@
+---
+all:
+  vars:
+    ansible_connection: ansible.netcommon.network_cli
+    ansible_become: yes
+    ansible_become_method: enable
+    ansible_network_os: cisco.ios.ios
+  children:
+    {% for group,host_list in inventory_object.inventory_dict_info.items() %}
+    {{group}}:
+      hosts:
+      {% for host in host_list %}
+        {{host.host_ip}}:
+          ansible_user: {{host.ansible_user}}
+          ansible_password: {{host.ansible_password}}
+          ansible_become_password: {{host.ansible_become_password}}
+      {% endfor %}
+    {% endfor %}

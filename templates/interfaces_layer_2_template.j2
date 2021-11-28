@@ -1,0 +1,63 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~ LAYER 2 INTERFACES IN UP STATE ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% for interface in ansible_facts.network_resources.l2_interfaces if 'mode' in interface %}
+{% if 'up' in ansible_facts['net_interfaces'][interface.name]['operstatus'] %}
+Interface: {{interface.name}}
+- STATE: {{ansible_facts['net_interfaces'][interface.name]['operstatus']}}
+- Mode: {{interface.mode}}
+{% if 'trunk' in interface %}
+- Trunk Allowed VLANs:
+{% for vlan in interface.trunk.allowed_vlans %}
+- {{vlan}}
+{% endfor %}
+{% else %}
+- Access VLAN: {{interface.access.vlan}}
+{% endif %}
+- MAC Address: {{ansible_facts['net_interfaces'][interface.name]['macaddress']}}
+- Description: {{ansible_facts['net_interfaces'][interface.name]['description']}}
+- MTU: {{ansible_facts['net_interfaces'][interface.name]['mtu']}}
+- Bandwidth: {{ansible_facts['net_interfaces'][interface.name]['bandwidth']}}
+- Duplex: {{ansible_facts['net_interfaces'][interface.name]['duplex']}}
+{% if ansible_facts['net_interfaces'][interface.name]['ipv4']|length > 0 %}
+{% for ip in ansible_facts['net_interfaces'][interface.name]['ipv4'] %}
+- IP Address: {{ip.address}}/{{ip.subnet}}
+{% endfor %}
+{% endif %}
+!
+{% endif %}
+{% endfor %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~ LAYER 2 INTERFACES IN DOWN STATE ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% set populated = false %}
+{% for interface in ansible_facts.network_resources.l2_interfaces if 'mode' in interface %}
+{% if 'down' in ansible_facts['net_interfaces'][interface.name]['operstatus'] %}
+Interface: {{interface.name}}
+- STATE: {{ansible_facts['net_interfaces'][interface.name]['operstatus']}}
+- Mode: {{interface.mode}}
+{% if 'trunk' in interface %}
+- Trunk Allowed VLANs:
+{% for vlan in interface.trunk.allowed_vlans %}
+- {{vlan}}
+{% endfor %}
+{% else %}
+- Access VLAN: {{interface.access.vlan}}
+{% endif %}
+- MAC Address: {{ansible_facts['net_interfaces'][interface.name]['macaddress']}}
+- Description: {{ansible_facts['net_interfaces'][interface.name]['description']}}
+- MTU: {{ansible_facts['net_interfaces'][interface.name]['mtu']}}
+- Bandwidth: {{ansible_facts['net_interfaces'][interface.name]['bandwidth']}}
+- Duplex: {{ansible_facts['net_interfaces'][interface.name]['duplex']}}
+{% if ansible_facts['net_interfaces'][interface.name]['ipv4']|length > 0 %}
+{% for ip in ansible_facts['net_interfaces'][interface.name]['ipv4'] %}
+- IP Address: {{ip.address}}/{{ip.subnet}}
+{% endfor %}
+{% endif %}
+!
+{% set populated = true %}
+{% endif %}
+{% endfor %}
+{% if populated != true %}
+NONE
+{% endif %}
