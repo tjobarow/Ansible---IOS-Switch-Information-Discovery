@@ -1,0 +1,24 @@
+---
+all:
+  vars:
+    ansible_connection: ansible.netcommon.network_cli
+    ansible_user: ansible
+  children:
+    switches:
+      children:
+        ios:
+          children:
+            production:
+              hosts:
+                10.0.4.1
+            testing:
+              hosts:
+                10.0.4.251
+          vars:
+            ansible_become: yes
+            ansible_become_method: enable
+            ansible_network_os: cisco.ios.ios
+            ansible_user: tobarows
+            ansible_password: cisco123
+            ansible_become_password: cisco123
+            ansible_connection: ansible.netcommon.network_cli
