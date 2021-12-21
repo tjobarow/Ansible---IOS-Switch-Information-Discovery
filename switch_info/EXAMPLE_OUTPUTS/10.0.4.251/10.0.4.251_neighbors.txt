@@ -1,0 +1,5 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~ CDP/LLDP NEIGHBORS ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Interface: GigabitEthernet0/0
+Host: WAN_switch, Platform: Cisco , Remote Interface: GigabitEthernet1/1
+---------------------------------------------------------------------------------------------
+

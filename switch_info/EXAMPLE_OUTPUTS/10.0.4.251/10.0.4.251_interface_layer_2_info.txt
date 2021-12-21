@@ -1,0 +1,48 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~ LAYER 2 INTERFACES IN UP STATE ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Interface: GigabitEthernet0/0
+- STATE: up
+- Mode: trunk
+- Trunk Allowed VLANs:
+- 4
+- MAC Address: 5254.0000.3853
+- Description: 
+- MTU: 1500
+- Bandwidth: 1000000
+- Duplex: Auto
+!
+Interface: GigabitEthernet0/1
+- STATE: up
+- Mode: access
+- Access VLAN: 2
+- MAC Address: 5254.0005.2d6d
+- Description: ACCESS_INTERFACE
+- MTU: 1500
+- Bandwidth: 1000000
+- Duplex: Auto
+!
+Interface: GigabitEthernet0/2
+- STATE: up
+- Mode: access
+- Access VLAN: 2
+- MAC Address: 5254.0002.982f
+- Description: ACCESS_INTERFACE
+- MTU: 1500
+- Bandwidth: 1000000
+- Duplex: Auto
+!
+Interface: GigabitEthernet0/3
+- STATE: up
+- Mode: access
+- Access VLAN: 2
+- MAC Address: 5254.000e.2e34
+- Description: ACCESS_INTERFACE
+- MTU: 1500
+- Bandwidth: 1000000
+- Duplex: Auto
+!
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~ LAYER 2 INTERFACES IN DOWN STATE ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+NONE
