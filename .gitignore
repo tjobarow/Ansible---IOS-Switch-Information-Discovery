@@ -1,5 +1,6 @@
 !/switch_info/.HOLDER
 !/inventories/customer_inventories/.HOLDER_INV
+!/switch_info/EXAMPLE_OUTPUTS/*
 /inventories/customer_inventories/*
 /switch_info/*
 *.zip
